@@ -1,0 +1,81 @@
+:root {
+    --primary-dark: #333;
+    --background-grey: #ededed;
+    --primary-font: 14px;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    background-color: var(--background-grey);
+    color: var(--primary-dark);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.library {
+    display: grid;
+    justify-content: start;
+    gap: 20px;
+}
+
+.book {
+    border: 1px solid black;
+    padding: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+.book:hover {
+    background-color: var(--primary-dark);
+    color: var(--background-grey);
+}
+
+.left-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    gap: 20px;
+}
+
+#new_book_btn {
+    width: 100px;
+}
+
+.form-popup {
+    /* background-color: darkgrey; */
+    border: 1px solid var(--primary-dark);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    font-size: var(--primary-font);
+}
+
+.fa-github {
+    color: var(--primary-dark);
+    transition: all 0.5s ease;
+    font-size: 32px;
+}
+
+.fa-github:hover {
+    transform: scale(1.2) rotate(360deg);
+}
