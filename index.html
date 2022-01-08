@@ -16,29 +16,43 @@
         <h1 class="title">Library</h1>
     </div>
 
+    <!-- Main -->
     <div class="main">
-        <!-- <div class="left-sidebar">
-            <button id="new_book_btn" onClick="open_form()">New Book</button>
-            <div class="form-popup" id="form">
-                <form action="/action_page.php">
-                    <label for="title">Title:
-                        <input type="text" id="title" name="title"><br>
-                    </label>
-                    <label for="author">Author:</label>
+        <!-- Form -->
+        <button data-open-button="#form">New Book</button>
+        <div class="form" id="form">
+            <div class="form-header">
+                <div class="title">Enter new book</div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="form-body">
+                <label>
+                    Title:
+                    <input type="text" id="title" name="title"><br>
+                </label>
+                <label>
+                    Author:
                     <input type="text" id="author" name="author"><br>
-                    <label for="pages">Pages:</label>
+                </label>
+                <label>
+                    Pages:
                     <input type="number" id="pages" name="pages"><br>
-                    <label for="read">Read:</label>
+                </label>    
+                <label>
+                    Read:
                     <input type="checkbox" id="read" name="read"><br>
-                    <button>Submit</button>
-                </form>
-                <button onClick="close_form()">Close</button>
-            </div>      
-        </div> -->
+                </label>    
+                <button data-submit-button class="submit-button">Submit</button>               
+            </div>
+        </div>
+        <div id="overlay"></div>
+
+        <!-- Library display -->
         <div class="library">
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <div>Copyright © 2021 Gavin Lim</div>
         <div class="github">

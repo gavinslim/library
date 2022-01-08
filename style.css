@@ -8,6 +8,9 @@ body {
     font-family: Roboto, sans-serif;
     background-color: var(--background-grey);
     color: var(--primary-dark);
+
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -17,26 +20,122 @@ body {
 
 .main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 20px;
+}
+
+.form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid var(--primary-dark);
+    z-index: 10;
+    background-color: var(--background-grey);
+    width: 300px;
+    max-width: 80%;
+}
+
+.form.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.form-header {
+    padding: 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.form-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.form-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px 15px;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .library {
     display: grid;
     justify-content: start;
+    grid-template-columns: repeat(3, 200px);
     gap: 20px;
 }
 
 .book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    gap: 10px;
     border: 1px solid black;
     padding: 10px;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
+}
+
+.delete-btn {
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.delete-btn:active {
+    background-color: red;
+}
+
+.book .delete-btn {
+    visibility: hidden;
+}
+
+.book:hover .delete-btn {
+    visibility: visible;
+}
+
+p {
+    margin: 0px;
 }
 
 .book:hover {
     background-color: var(--primary-dark);
-    color: var(--background-grey);
+    color: var(--background-grey);   
 }
 
 .left-sidebar {
@@ -58,7 +157,7 @@ body {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
@@ -66,8 +165,10 @@ body {
     align-items: center;
     gap: 10px;
     width: 100%;
+    padding-top: 10px;
     padding-bottom: 10px;
     font-size: var(--primary-font);
+    /* background-color: var(--background-grey); */
 }
 
 .fa-github {
