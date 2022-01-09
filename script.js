@@ -67,27 +67,35 @@ function refresh_library() {
         close.addEventListener('click', delete_book);
         child.appendChild(close);
 
-        // Add checkmark for read
+        // Add checkmark button for read status
         const read = document.createElement('button');
         read.classList.add('fas', 'fa-check-circle', 'check-btn');
         read.addEventListener('click', toggle_read);
 
         child.appendChild(read);
 
-        // Populate book
+        // Iterate each property in object and update book
         for (const [key, value] of Object.entries(book)) {
             const paragraph = document.createElement('p');
+            
+            // Add title info and delete button
             if (key == 'title') {
                 paragraph.classList.add('book-title');
                 paragraph.innerHTML = `${value}`;
-
-                // Modify delete button to specify current book
                 child.setAttribute('id', value)
+            
+            // Add author info
             } else if (key == 'author') {
                 paragraph.classList.add('book-author');
                 paragraph.innerHTML = `${value}`;
+            
+            // Add page info 
+            } else if (key == 'pages') {
+                paragraph.classList.add('book-pages');
+                paragraph.innerHTML = `${value} pages`;
+            
+            // Add read button status 
             } else if (key == 'read') {
-                // Update read button if book has been read
                 if (value == true) {read.classList.add('active');}
                 else {read.classList.remove('active');}
             } else {
@@ -128,10 +136,10 @@ submit_button.addEventListener('click', () => {
     refresh_library();
 });
 
-const lotr = new book("The Hobbit", "J.R.R. Tolkien", 295, true);
-const harrypotter = new book("Harry Potter and the Globlet of Fire", "J.K. Rowling", 200, true);
+const lotr = new book("The Hobbit", "J.R.R. Tolkien", 295, false);
+const harrypotter = new book("Harry Potter and the Globlet of Fire", "J.K. Rowling", 200, false);
 const starwars = new book("Dark Force Rising", "Timothy Zahn", 34, false);
-const got = new book("A Clash of Kings", "George R.R. Martin", 382, true);
+const got = new book("A Clash of Kings", "George R.R. Martin", 382, false);
 
 add_to_library(lotr);
 add_to_library(harrypotter);

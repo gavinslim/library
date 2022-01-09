@@ -93,6 +93,36 @@ h1 {
     color: var(--background-grey);   
 }
 
+p {
+    margin: 0px;
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: var(--title-font);
+    text-align: center;
+}
+
+.book-author {
+    font-size: var(--author-font);
+    text-align: center;  
+}
+
+.book-pages {
+    position: absolute;
+    bottom: 5px;
+    left: 8px;
+
+    /* padding: 5px; */
+    color: var(--primary-dark);
+    /* font-weight: bold; */
+    font-size: var(--author-font);
+}
+
+.book:hover .book-pages {
+    color: var(--background-grey);
+}
+
 .delete-book-btn {
     position: absolute;
     top: 5px;
@@ -110,6 +140,11 @@ h1 {
 
 .delete-book-btn:after {
     content: "\00d7";
+}
+
+.book:hover .delete-book-btn {
+    visibility: visible;
+    color: var(--background-grey);
 }
 
 .check-btn {
@@ -130,25 +165,7 @@ h1 {
     color: #4CBB17;
 }
 
-.book:hover .delete-book-btn {
-    visibility: visible;
-    color: var(--background-grey);
-}
 
-p {
-    margin: 0px;
-}
-
-.book-title {
-    font-weight: bold;
-    font-size: var(--title-font);
-    text-align: center;
-}
-
-.book-author {
-    font-size: var(--author-font);
-    text-align: center;  
-}
 
 .form {
     position: fixed;
