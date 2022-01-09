@@ -1,18 +1,20 @@
 let my_library = [];
 
-// Retrieve selectors for form (data attributes) and overlay
-// Reference: https://www.youtube.com/watch?v=MBaw_6cPmAw&ab_channel=WebDevSimplified
-const open_button = document.querySelector('[data-open-button]');
-const close_button = document.querySelector('[data-close-button]');
-const submit_button = document.querySelector('[data-submit-button]');
-const overlay = document.getElementById('overlay');
-
 function book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 }
+
+// Retrieve selectors for form (data attributes) and overlay
+// Reference: https://www.youtube.com/watch?v=MBaw_6cPmAw&ab_channel=WebDevSimplified
+const open_button = document.querySelector('[data-open-button]');
+const close_button = document.querySelector('[data-close-button]');
+const submit_button = document.querySelector('[data-submit-button]');
+const form = document.querySelector('.form');
+const overlay = document.getElementById('overlay');
+const remove_book_button = document.querySelector('delete-btn')
 
 // Define info function on prototype
 book.prototype.info = function() {
@@ -26,6 +28,13 @@ function add_to_library(input_book) {
     my_library.push(input_book);
 }
 
+// Find and remove book in my_library array
+function delete_book() {
+    var book_index = my_library.findIndex(book => book.title == this.parentNode.id);
+    my_library.splice(book_index, 1);
+    refresh_library();
+}
+
 // Refresh library display
 function refresh_library() {
     let parent = document.getElementsByClassName('library')[0];
@@ -33,19 +42,35 @@ function refresh_library() {
     // Delete current display
     parent.innerHTML = '';
 
-    // Add to library grid
+    // Add book to library display
     my_library.forEach(book => {
     
         const child = document.createElement('div');
         child.classList.add('book');
-
+        
+        // Add delete button
         const close = document.createElement('button');
-        close.classList.add('delete-btn');
+        close.classList.add('delete-book-btn');
+        close.addEventListener('click', delete_book);
         child.appendChild(close);
 
+        // Populate book
         for (const [key, value] of Object.entries(book)) {
             const paragraph = document.createElement('p');
-            paragraph.innerHTML = `${value}`;
+            if (key == 'title') {
+                paragraph.classList.add('book-title');
+                paragraph.innerHTML = `${value}`;
+
+                // Modify delete button to specify current book
+                child.setAttribute('id', value)
+            }
+            else if (key == 'author') {
+                paragraph.classList.add('book-author');
+                paragraph.innerHTML = `${value}`;
+            } else {
+                continue;
+            }            
+            
             child.appendChild(paragraph);
         }
 
@@ -53,27 +78,14 @@ function refresh_library() {
     });
 }
 
-// Open pop-up form
-function open_form() {
-    document.getElementById('form').style.display = "block";
-    console.log('hello');
-}
-
-// Close pop-up form
-function close_form() {
-    document.getElementById('form').style.display = "none";
-}
-
 // Activate form and overlay
 open_button.addEventListener('click', () => {
-    const form = document.querySelector('.form');
     form.classList.add('active');
     overlay.classList.add('active');
 });
 
 // Disable form and overlay
 close_button.addEventListener('click', () => {
-    const form = document.querySelector('.form');
     form.classList.remove('active');
     overlay.classList.remove('active');
 });
@@ -93,19 +105,17 @@ submit_button.addEventListener('click', () => {
     const new_book = new book(title, author, pages, temp);
     add_to_library(new_book);
     
-    // Modify feature of book if already read 
-
     refresh_library();
 });
 
-// const lotr = new book("The Hobbit", "J.R.R. Tolkien", 295, true);
-// const harrypotter = new book("Globet of Fire", "J.K. Rowling", 200, true);
-// const starwars = new book("Dark Force Rising", "Timothy Zahn", 34, false);
-// const book1 = new book("Book 1", "Author 1", 123, true);
+const lotr = new book("The Hobbit", "J.R.R. Tolkien", 295, true);
+const harrypotter = new book("Harry Potter and the Globlet of Fire", "J.K. Rowling", 200, true);
+const starwars = new book("Dark Force Rising", "Timothy Zahn", 34, false);
+const got = new book("A Clash of Kings", "George R.R. Martin", 382, true);
 
-// add_to_library(lotr);
-// add_to_library(harrypotter);
-// add_to_library(starwars);
-// add_to_library(book1);
-// refresh_library();
+add_to_library(lotr);
+add_to_library(harrypotter);
+add_to_library(starwars);
+add_to_library(got);
+refresh_library();
 

@@ -2,6 +2,11 @@
     --primary-dark: #333;
     --background-grey: #ededed;
     --primary-font: 14px;
+
+    --title-font: 20px;
+    --author-font: 16px;
+    --book-width: 200px;
+    --book-gap: 20px
 }
 
 body {
@@ -11,26 +16,127 @@ body {
 
     display: flex;
     flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .header {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
+h1 {
+    margin: 0;
+}
+
+/* Main */
 .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    padding-bottom: 60px;
+}
+
+.library {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: calc((var(--book-width) + var(--book-gap)) * 5);
+    gap: var(--book-gap);
+}
+
+#new-book-btn {
+    background-color: var(--primary-dark);
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    /* content: "\00d7"; */
+    /* color: white; */
+    transition: all 0.8s;
+}
+
+#new-book-btn:after {
+    content: "\002b";
+    font-size: 50px;
+    color: var(--background-grey);
+}
+
+#new-book-btn:hover {
+    /* box-shadow: 0 0 10px 10px green; */
+    transform: rotate(180deg);
+}
+
+.book {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    gap: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    width: var(--book-width);
+    height: var(--book-width);
+}
+
+.book:hover {
+    background-color: var(--primary-dark);
+    color: var(--background-grey);   
+}
+
+.delete-book-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 25px;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+
+    visibility: hidden;
+}
+
+.delete-book-btn:after {
+    content: "\00d7";
+}
+
+.book:hover .delete-book-btn {
+    visibility: visible;
+    color: var(--background-grey);
+}
+
+p {
+    margin: 0px;
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: var(--title-font);
+    text-align: center;
+}
+
+.book-author {
+    font-size: var(--author-font);
+    text-align: center;  
 }
 
 .form {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);  /* Hidden */
     transition: 200ms ease-in-out;
     border: 1px solid var(--primary-dark);
     z-index: 10;
@@ -89,91 +195,27 @@ body {
     pointer-events: all;
 }
 
-.library {
-    display: grid;
-    justify-content: start;
-    grid-template-columns: repeat(3, 200px);
-    gap: 20px;
-}
-
-.book {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0px;
-    gap: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    width: 180px;
-    height: 180px;
-}
-
-.delete-btn {
-    background-color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-    border: 2px solid black;
-}
-
-.delete-btn:active {
-    background-color: red;
-}
-
-.book .delete-btn {
-    visibility: hidden;
-}
-
-.book:hover .delete-btn {
-    visibility: visible;
-}
-
-p {
-    margin: 0px;
-}
-
-.book:hover {
-    background-color: var(--primary-dark);
-    color: var(--background-grey);   
-}
-
-.left-sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 30vw;
-    gap: 20px;
-}
-
-#new_book_btn {
-    width: 100px;
-}
-
-.form-popup {
-    /* background-color: darkgrey; */
-    border: 1px solid var(--primary-dark);
-}
-
+/* Footer */
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: var(--primary-font);
+
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: var(--primary-font);
-    /* background-color: var(--background-grey); */
+    /* background-color: darkgray; */
 }
 
 .fa-github {
     color: var(--primary-dark);
-    transition: all 0.5s ease;
+    transition: 0.5s ease;
     font-size: 32px;
 }
 
