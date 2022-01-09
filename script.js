@@ -35,6 +35,19 @@ function delete_book() {
     refresh_library();
 }
 
+// Toggling read status and updating my_library array
+function toggle_read() {
+    var book = my_library.find(book => book.title == this.parentNode.id);
+
+    if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        book.read = false;
+    } else {
+        this.classList.add('active');
+        book.read = true;
+    }    
+}
+
 // Refresh library display
 function refresh_library() {
     let parent = document.getElementsByClassName('library')[0];
@@ -54,6 +67,13 @@ function refresh_library() {
         close.addEventListener('click', delete_book);
         child.appendChild(close);
 
+        // Add checkmark for read
+        const read = document.createElement('button');
+        read.classList.add('fas', 'fa-check-circle', 'check-btn');
+        read.addEventListener('click', toggle_read);
+
+        child.appendChild(read);
+
         // Populate book
         for (const [key, value] of Object.entries(book)) {
             const paragraph = document.createElement('p');
@@ -63,14 +83,16 @@ function refresh_library() {
 
                 // Modify delete button to specify current book
                 child.setAttribute('id', value)
-            }
-            else if (key == 'author') {
+            } else if (key == 'author') {
                 paragraph.classList.add('book-author');
                 paragraph.innerHTML = `${value}`;
+            } else if (key == 'read') {
+                // Update read button if book has been read
+                if (value == true) {read.classList.add('active');}
+                else {read.classList.remove('active');}
             } else {
                 continue;
             }            
-            
             child.appendChild(paragraph);
         }
 
@@ -95,14 +117,12 @@ submit_button.addEventListener('click', () => {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
-    const read = document.getElementById('read').value;
+    const read = document.getElementById('read').checked;
 
     // Check if submitted book already exists in library
     
-
-    // Add to library
-    let temp = read == 'on' ? true : false;
-    const new_book = new book(title, author, pages, temp);
+    // New book to library
+    const new_book = new book(title, author, pages, read);
     add_to_library(new_book);
     
     refresh_library();

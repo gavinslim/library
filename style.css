@@ -112,6 +112,24 @@ h1 {
     content: "\00d7";
 }
 
+.check-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    
+    padding: 0;
+    color: lightgray;
+}
+
+.check-btn.active {
+    color: #4CBB17;
+}
+
 .book:hover .delete-book-btn {
     visibility: visible;
     color: var(--background-grey);
