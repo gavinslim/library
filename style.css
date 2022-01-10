@@ -1,10 +1,11 @@
 :root {
     --primary-dark: #333;
     --background-grey: #ededed;
-    --primary-font: 14px;
 
-    --title-font: 20px;
-    --author-font: 16px;
+    --display-font: 42px;
+    --header-font: 34px;
+    --title-1-font: 18px;
+    --body-font: 14px;
     --book-width: 200px;
     --book-gap: 20px
 }
@@ -29,6 +30,7 @@ body {
 }
 
 h1 {
+    font-size: var(--display-font);
     margin: 0;
 }
 
@@ -82,10 +84,13 @@ h1 {
     align-items: center;
     margin: 0px;
     gap: 10px;
-    border: 1px solid black;
+    /* border: 1px solid var(--primary-dark); */
+    border-radius: 10px;
     padding: 10px;
     width: var(--book-width);
     height: var(--book-width);
+
+    background-color: lightgray;
 }
 
 .book:hover {
@@ -99,24 +104,22 @@ p {
 
 .book-title {
     font-weight: bold;
-    font-size: var(--title-font);
+    font-size: var(--title-1-font);
     text-align: center;
 }
 
 .book-author {
-    font-size: var(--author-font);
+    font-size: var(--body-font);
     text-align: center;  
 }
 
 .book-pages {
     position: absolute;
-    bottom: 5px;
-    left: 8px;
+    bottom: 8px;
+    left: 10px;
 
-    /* padding: 5px; */
     color: var(--primary-dark);
-    /* font-weight: bold; */
-    font-size: var(--author-font);
+    font-size: var(--body-font);
 }
 
 .book:hover .book-pages {
@@ -126,7 +129,7 @@ p {
 .delete-book-btn {
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 13.5px;
 
     cursor: pointer;
     background-color: transparent;
@@ -144,73 +147,125 @@ p {
 
 .book:hover .delete-book-btn {
     visibility: visible;
-    color: var(--background-grey);
+    color: var(--primary-dark);
+    z-index: 9;
 }
 
-.check-btn {
+/* Modify button */
+.modify-btn, .check-btn {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-
     cursor: pointer;
     background-color: transparent;
     border: none;
-    font-size: 30px;
-    
     padding: 0;
+    font-size: 30px;
     color: lightgray;
+}
+
+.modify-btn {
+    top: 8px;
+    left: 8px;
+    transition: 1s;
+}
+
+.modify-btn:hover {
+    /* transform: rotate(180deg); */
+}
+
+.check-btn {
+    bottom: 8px;
+    right: 8px;
 }
 
 .check-btn.active {
     color: #4CBB17;
 }
 
+.bookmark {
+    position: absolute;
+    top: 0;
+    right: 10px;
 
+    font-size: 45px;
+    color: rgba(139, 0, 0, 0.726);
+}
 
-.form {
+.book:hover .bookmark {
+    color: var(--background-grey);
+}
+
+/* Form  */
+.form, .modify{
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);  /* Hidden */
     transition: 200ms ease-in-out;
-    border: 1px solid var(--primary-dark);
     z-index: 10;
     background-color: var(--background-grey);
     width: 300px;
     max-width: 80%;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.form.active {
+.form.active, .modify.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.form-header {
-    padding: 15px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
+.form-header, .modify-header {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.form-header .title {
-    font-size: 1.25rem;
+.form-header .title, .modify-header .title {
     font-weight: bold;
+    text-align: center;
+    font-size: var(--header-font);
 }
 
-.form-header .close-button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.form-body {
+.form-body, .modify-body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 15px 15px;
+    padding: 20px;
+}
+
+.form-body .bottom, .modify-body .bottom {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.form-body label, .modify-body label {
+    display: flex;
+    justify-content: center;
+}
+
+.form-body input, .modify-body input {
+    border: none;
+    height: 25px;
+    padding: 5px;
+    font-size: var(--body-font);
+}
+
+.form-body input::placeholder {
+    position: relative;
+    color: hsl(0, 0%, 36%);
+    font-size: var(--body-font);
+}
+
+.submit-btn, .close-btn, .modify-submit-btn, .modify-close-btn {
+    cursor: pointer;
+    font-size: var(--body-font);
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
 }
 
 #overlay {
@@ -239,7 +294,7 @@ p {
     height: 40px;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-size: var(--primary-font);
+    font-size: var(--body-font);
 
     display: flex;
     justify-content: center;

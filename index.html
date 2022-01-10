@@ -16,53 +16,72 @@
         <h1 class="title">Library</h1>
     </div>
     
-    <!-- Main -->
     <div class="main">
-        <!-- Form -->
         <button data-open-button="#form" id="new-book-btn"></button>
         <div class="form" id="form">
             <div class="form-header">
-                <div class="title">Enter new book</div>
-                <button data-close-button class="close-button">&times;</button>
+                <div class="title">Add Book</div>
             </div>
             <div class="form-body">
                 <label>
-                    Title:
-                    <input type="text" id="title" name="title"><br>
+                    <input type="text" name="title" id="title" placeholder="Title" autocomplete="off"><br>
                 </label>
                 <label>
-                    Author:
-                    <input type="text" id="author" name="author"><br>
+                    <input type="text" id="author" placeholder="Author" autocomplete="off"><br>
                 </label>
                 <label>
-                    Pages:
-                    <input type="number" id="pages" name="pages"><br>
+                    <input type="number" id="pages" placeholder="Number of Pages" autocomplete="off"><br>
                 </label>    
                 <label>
-                    Read:
-                    <input type="checkbox" id="read" name="read"><br>
+                    <input type="checkbox" id="read"><br>
+                    <span class="slider"></span>
                 </label>    
-                <button data-submit-button class="submit-button">Submit</button>               
+                <div class="bottom">
+                    <button data-submit-button class="submit-btn">Submit</button>               
+                    <button data-close-button class="close-btn">Cancel</button>
+                </div>
             </div>
         </div>
-        <div id="overlay"></div>
 
-        <!-- Library display -->
+        <div class="modify" id="modify">
+            <div class="modify-header">
+                <div class="title">Modify Book</div>
+            </div>
+            <div class="modify-body">
+                <label>
+                    <input type="text" name="title" id="modify-title" placeholder="Title" autocomplete="off"><br>
+                </label>
+                <label>
+                    <input type="text" id="modify-author" placeholder="Author" autocomplete="off"><br>
+                </label>
+                <label>
+                    <input type="number" id="modify-pages" placeholder="Number of Pages" autocomplete="off"><br>
+                </label>    
+                <label>
+                    <input type="checkbox" id="modify-read"><br>
+                    <!-- <span class="slider"></span> -->
+                </label>    
+                <div class="bottom">
+                    <button data-modify-submit-button class="modify-submit-btn">Submit</button>               
+                    <button data-modify-close-button class="modify-close-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <div class="library">
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <div>Copyright © 2021 Gavin Lim</div>
         <div class="github">
-
-            <!-- fontawesome.com github -->
             <a href="https://github.com/gavinslim" target="_blank">
                 <i class="fab fa-github"></i>
             </a>
         </div>     
     </div>
+
+    <div id="overlay"></div>
 
 </body>
 </html>

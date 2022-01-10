@@ -7,12 +7,24 @@ function book(title, author, pages, read) {
     this.read = read;
 }
 
+/*
+    ToDos:
+    - Sort by author, title, pages, read
+    - Add bookmark image 
+    - Display number of unread books (include percentage)
+    - Add modify book button
+    - overal disables all pointers
+*/
+
 // Retrieve selectors for form (data attributes) and overlay
 // Reference: https://www.youtube.com/watch?v=MBaw_6cPmAw&ab_channel=WebDevSimplified
 const open_button = document.querySelector('[data-open-button]');
+const form = document.querySelector('.form');
 const close_button = document.querySelector('[data-close-button]');
 const submit_button = document.querySelector('[data-submit-button]');
-const form = document.querySelector('.form');
+const modify = document.querySelector('.modify');
+const modify_close_button = document.querySelector('[data-modify-close-button]');
+const modify_submit_button = document.querySelector('[data-modify-submit-button]');
 const overlay = document.getElementById('overlay');
 const remove_book_button = document.querySelector('delete-btn')
 
@@ -41,12 +53,53 @@ function toggle_read() {
 
     if (this.classList.contains('active')) {
         this.classList.remove('active');
-        book.read = false;
+        book.checked = false;
     } else {
         this.classList.add('active');
-        book.read = true;
+        book.checked = true;
     }    
 }
+
+// Modify book
+function modify_book() {
+
+    // Find book 
+    var book = my_library.find(book => book.title == this.parentNode.id);
+
+    document.getElementById('modify-title').value = book.title;
+    document.getElementById('modify-author').value = book.author;
+    document.getElementById('modify-pages').value = book.pages;
+    document.getElementById('modify-read').checked = book.checked;
+
+    this.parentNode.classList.add('target');
+    modify.classList.add('active');
+    overlay.classList.add('active');
+}
+
+modify_submit_button.addEventListener('click', () => {
+
+    // Find book and modify it based on user inputs
+    const selected = document.querySelector('.target');
+    var book = my_library.find(book => book.title == selected.getAttribute('id'));
+    book.title = document.getElementById('modify-title').value;
+    book.author = document.getElementById('modify-author').value;
+    book.pages = document.getElementById('modify-pages').value;
+    book.read = document.getElementById('modify-read').checked;
+
+    selected.classList.remove('target');
+    modify.classList.remove('active');
+    overlay.classList.remove('active');
+
+    refresh_library();
+});
+
+// Close modify form
+modify_close_button.addEventListener('click', () => {
+    const temp = document.querySelector('.target');
+    temp.classList.remove('target');
+    modify.classList.remove('active');
+    overlay.classList.remove('active');
+});
 
 // Refresh library display
 function refresh_library() {
@@ -71,8 +124,18 @@ function refresh_library() {
         const read = document.createElement('button');
         read.classList.add('fas', 'fa-check-circle', 'check-btn');
         read.addEventListener('click', toggle_read);
-
         child.appendChild(read);
+
+        // Add modify button
+        const modify = document.createElement('button');
+        modify.classList.add('fas', 'fa-cog', 'modify-btn');
+        modify.addEventListener('click', modify_book);
+        child.appendChild(modify);
+
+        // Add bookmark feature
+        const bookmark = document.createElement('div');
+        bookmark.classList.add('fas', 'fa-bookmark', 'bookmark');
+        child.appendChild(bookmark);
 
         // Iterate each property in object and update book
         for (const [key, value] of Object.entries(book)) {
@@ -118,25 +181,37 @@ open_button.addEventListener('click', () => {
 close_button.addEventListener('click', () => {
     form.classList.remove('active');
     overlay.classList.remove('active');
+
+    // Clear input fields
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
 });
 
 // Submit form
 submit_button.addEventListener('click', () => {
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-    const pages = document.getElementById('pages').value;
-    const read = document.getElementById('read').checked;
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+    const pages = document.getElementById('pages');
+    const read = document.getElementById('read');
 
     // Check if submitted book already exists in library
     
+
     // New book to library
-    const new_book = new book(title, author, pages, read);
+    const new_book = new book(title.value, author.value, pages.value, read.checked);
     add_to_library(new_book);
-    
     refresh_library();
+
+    // Clear input fields
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
 });
 
-const lotr = new book("The Hobbit", "J.R.R. Tolkien", 295, false);
+const lotr = new book("The Hobbit", "J.R.R. Tolkien", 2905, false);
 const harrypotter = new book("Harry Potter and the Globlet of Fire", "J.K. Rowling", 200, false);
 const starwars = new book("Dark Force Rising", "Timothy Zahn", 34, false);
 const got = new book("A Clash of Kings", "George R.R. Martin", 382, false);
