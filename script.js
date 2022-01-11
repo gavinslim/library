@@ -84,10 +84,38 @@ modify_submit_button.addEventListener('click', () => {
     // Find book and modify it based on user inputs
     const selected = document.querySelector('.target');
     var book = my_library.find(book => book.title == selected.getAttribute('id'));
-    book.title = document.getElementById('modify-title').value;
-    book.author = document.getElementById('modify-author').value;
-    book.pages = document.getElementById('modify-pages').value;
-    book.read = document.getElementById('modify-read').checked;
+
+    const title = document.getElementById('modify-title');   
+    const author = document.getElementById('modify-author');
+    const pages = document.getElementById('modify-pages');
+    const read = document.getElementById('modify-read');
+
+    // Check if submitted book already exists in library
+    if (title.value == '') {
+        title.setAttribute('placeholder', 'Please add title name!');
+        return;
+    } else {
+        title.removeAttribute('placeholder');
+    }
+
+    if (author.value == '') {
+        author.setAttribute('placeholder', 'Please add author\'s name!');
+        return;
+    } else {
+        author.removeAttribute('placeholder');
+    }
+
+    if (pages.value == '') {
+        pages.setAttribute('placeholder', 'Please add number of pages!');
+        return;
+    } else {
+        pages.removeAttribute('placeholder');
+    }
+
+    book.title = title.value;
+    book.author = author.value;
+    book.pages = pages.value;
+    book.read = read.checked;
 
     selected.classList.remove('target');
     modify.classList.remove('active');
@@ -200,7 +228,26 @@ submit_button.addEventListener('click', () => {
     const read = document.getElementById('read');
 
     // Check if submitted book already exists in library
-    
+    if (title.value == '') {
+        title.setAttribute('placeholder', 'Please add title name!');
+        return;
+    } else {
+        title.removeAttribute('placeholder');
+    }
+
+    if (author.value == '') {
+        author.setAttribute('placeholder', 'Please add author\'s name!');
+        return;
+    } else {
+        author.removeAttribute('placeholder');
+    }
+
+    if (pages.value == '') {
+        pages.setAttribute('placeholder', 'Please add number of pages!');
+        return;
+    } else {
+        pages.removeAttribute('placeholder');
+    }
 
     // New book to library
     const new_book = new book(title.value, author.value, pages.value, read.checked);
