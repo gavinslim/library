@@ -6,7 +6,7 @@
     --header-font: 34px;
     --title-1-font: 18px;
     --body-font: 14px;
-    --book-width: 200px;
+    --book-width: 220px;
     --book-gap: 20px
 }
 
@@ -21,6 +21,8 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+
+
 
 .header {
     display: flex;
@@ -168,10 +170,6 @@ p {
     transition: 1s;
 }
 
-.modify-btn:hover {
-    /* transform: rotate(180deg); */
-}
-
 .check-btn {
     bottom: 8px;
     right: 8px;
@@ -203,7 +201,7 @@ p {
     transition: 200ms ease-in-out;
     z-index: 10;
     background-color: var(--background-grey);
-    width: 300px;
+    width: 400px;
     max-width: 80%;
     border-radius: 10px;
 
@@ -230,6 +228,7 @@ p {
 .form-body, .modify-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 20px;
 }
@@ -247,16 +246,28 @@ p {
 
 .form-body input, .modify-body input {
     border: none;
-    height: 25px;
+    height: 30px;
     padding: 5px;
     font-size: var(--body-font);
 }
 
-.form-body input::placeholder {
-    position: relative;
-    color: hsl(0, 0%, 36%);
+.field {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
     font-size: var(--body-font);
 }
+
+.field label {
+    width: 60px;
+}
+
+.field input {
+    width: 225px;
+    border-radius: 10px;
+}
+
 
 .submit-btn, .close-btn, .modify-submit-btn, .modify-close-btn {
     cursor: pointer;
@@ -283,6 +294,52 @@ p {
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+
+/* Slider container */
+.switch {
+    position: relative;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    visibility: hidden;
+}
+
+/* Slider Background */
+.slider {
+    position: absolute;
+    background-color: lightgray;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+/* Slider Dot */
+.slider:before {
+    position: absolute;
+    content: "";
+    background-color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    bottom: 4px;
+    left: 4px;
+    transition: 200ms;
+}
+
+input:checked + .slider {
+    background-color: #4CBB17;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
 
 /* Footer */

@@ -12,8 +12,10 @@ function book(title, author, pages, read) {
     - Sort by author, title, pages, read
     - Add bookmark image 
     - Display number of unread books (include percentage)
-    - Add modify book button
-    - overal disables all pointers
+    - [Done] Add modify book button
+    - [Done] overlay disables all pointers
+    - Form checks that input fields are filled
+    - [Done] Add settings button to modify book
 */
 
 // Retrieve selectors for form (data attributes) and overlay
@@ -53,29 +55,30 @@ function toggle_read() {
 
     if (this.classList.contains('active')) {
         this.classList.remove('active');
-        book.checked = false;
+        book.read = false;
     } else {
         this.classList.add('active');
-        book.checked = true;
+        book.read = true;
     }    
 }
 
-// Modify book
+// Settings pop-up
 function modify_book() {
 
-    // Find book 
+    // Fill input fields based on selected book 
     var book = my_library.find(book => book.title == this.parentNode.id);
-
     document.getElementById('modify-title').value = book.title;
     document.getElementById('modify-author').value = book.author;
     document.getElementById('modify-pages').value = book.pages;
-    document.getElementById('modify-read').checked = book.checked;
+    document.getElementById('modify-read').checked = book.read;
 
+    // Add 'target' class to indicate selected book for submit button
     this.parentNode.classList.add('target');
     modify.classList.add('active');
     overlay.classList.add('active');
 }
 
+// Submit button in Settings pop-up
 modify_submit_button.addEventListener('click', () => {
 
     // Find book and modify it based on user inputs
@@ -93,7 +96,7 @@ modify_submit_button.addEventListener('click', () => {
     refresh_library();
 });
 
-// Close modify form
+// Close button in Settings pop-up
 modify_close_button.addEventListener('click', () => {
     const temp = document.querySelector('.target');
     temp.classList.remove('target');

@@ -23,19 +23,24 @@
                 <div class="title">Add Book</div>
             </div>
             <div class="form-body">
-                <label>
-                    <input type="text" name="title" id="title" placeholder="Title" autocomplete="off"><br>
-                </label>
-                <label>
-                    <input type="text" id="author" placeholder="Author" autocomplete="off"><br>
-                </label>
-                <label>
-                    <input type="number" id="pages" placeholder="Number of Pages" autocomplete="off"><br>
-                </label>    
-                <label>
-                    <input type="checkbox" id="read"><br>
-                    <span class="slider"></span>
-                </label>    
+                <div class="field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="pages">Pages</label>
+                    <input type="number" id="pages" autocomplete="off">
+                </div>
+                <div class="field">Read
+                    <label class="switch">
+                        <input type="checkbox" id="read">
+                        <span class="slider"></span>
+                    </label>    
+                </div>
                 <div class="bottom">
                     <button data-submit-button class="submit-btn">Submit</button>               
                     <button data-close-button class="close-btn">Cancel</button>
@@ -48,25 +53,32 @@
                 <div class="title">Modify Book</div>
             </div>
             <div class="modify-body">
-                <label>
-                    <input type="text" name="title" id="modify-title" placeholder="Title" autocomplete="off"><br>
-                </label>
-                <label>
-                    <input type="text" id="modify-author" placeholder="Author" autocomplete="off"><br>
-                </label>
-                <label>
-                    <input type="number" id="modify-pages" placeholder="Number of Pages" autocomplete="off"><br>
-                </label>    
-                <label>
-                    <input type="checkbox" id="modify-read"><br>
-                    <!-- <span class="slider"></span> -->
-                </label>    
+                <div class="field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="modify-title" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="author">Author</label>
+                    <input type="text" id="modify-author" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="pages">Pages</label>
+                    <input type="number" id="modify-pages" autocomplete="off">
+                </div>
+                <div class="field">Read
+                    <label class="switch">
+                        <input type="checkbox" id="modify-read">
+                        <span class="slider"></span>
+                    </label>    
+                </div>  
                 <div class="bottom">
                     <button data-modify-submit-button class="modify-submit-btn">Submit</button>               
                     <button data-modify-close-button class="modify-close-btn">Cancel</button>
                 </div>
             </div>
         </div>
+
+
 
         <div class="library">
         </div>
@@ -80,7 +92,6 @@
             </a>
         </div>     
     </div>
-
     <div id="overlay"></div>
 
 </body>
