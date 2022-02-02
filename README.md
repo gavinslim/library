@@ -32,5 +32,5 @@ Lessons:
 - Use of prototype attribute
 - Create a form 
 - Ability to add/remove/modify new object
-- Create overlay to flur background
+- Create overlay to blur background
 - Create a toggle switch
