@@ -2,7 +2,7 @@
 
 Implementation of the Library project from The Odin Project [curriculum](https://www.theodinproject.com/)
 
-[Live Demo](http://gavinslim.com/odin-library/) :point_left:
+[Live Demo](http://gavinslim.com/library/) :point_left:
 
 ---
 
